@@ -2,6 +2,7 @@
 
 namespace App\controllers;
 
+use App\models\Bread;
 use Ngomafortuna\RouteSystemSimple\Controller;
 
 class BreadController extends Controller
@@ -9,6 +10,11 @@ class BreadController extends Controller
     // Lista todos os pães
     public function index(): void
     {
+        $breads = new Bread();
+        $breads = $breads->all();
+
+        dd($breads);
+        
         $this->view->render('breads', [
             'title' => 'Pães',
             'description' => 'Veja nossa seleção de pães artesanais.'
@@ -27,6 +33,10 @@ class BreadController extends Controller
             'price' => 'R$ 8,50',
             'description' => 'Crosta crocante, miolo aerado, feito com fermentação natural.'
         ];
+
+        $bread = new Bread();
+        $bread = $bread->findBySlug($slug);
+
         $this->view->render('bread', [
             'bread' => $bread,
             'title' => $bread['name'],
