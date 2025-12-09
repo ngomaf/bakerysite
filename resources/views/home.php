@@ -19,47 +19,43 @@
 				</div>
 
 				<div class="row g-4">
+					<?php
+					// Espera-se que $breads seja um array de objetos ou arrays associativos fornecido pelo HomeController
+					if (!empty($breads) && is_array($breads)):
+						$max = 3; $count = 0;
+						foreach ($breads as $bread):
+							if ($count++ >= $max) break;
+							$name = is_object($bread) ? ($bread->name ?? '') : ($bread['name'] ?? '');
+							$slug = is_object($bread) ? ($bread->slug ?? '') : ($bread['slug'] ?? '');
+							$description = is_object($bread) ? ($bread->description ?? '') : ($bread['description'] ?? '');
+							$price = is_object($bread) ? ($bread->price ?? 0) : ($bread['price'] ?? 0);
+							$image = is_object($bread) ? ($bread->image ?? '') : ($bread['image'] ?? '');
+							$priceFmt = 'R$ ' . number_format((float)$price, 2, ',', '.');
+							if (empty($image)) {
+								$image = 'https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=600&q=80';
+							}
+					?>
 					<div class="col-md-4">
 						<div class="card product-card">
-							<img src="https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Bolo de Laranja">
+							<img src="<?= htmlspecialchars($image) ?>" class="card-img-top" alt="<?= htmlspecialchars($name) ?>">
 							<div class="card-body">
-								<h5 class="card-title">Pão Italiano</h5>
-								<p class="card-text text-muted">Crosta crocante, miolo macio — feito artesanalmente.</p>
+								<h5 class="card-title"><?= htmlspecialchars($name) ?></h5>
+								<p class="card-text text-muted"><?= htmlspecialchars($description) ?></p>
 								<div class="d-flex justify-content-between align-items-center">
-									<strong>R$ 8,50</strong>
-									<a href="/bread/pao-italiano" class="btn btn-sm btn-outline-primary">Detalhes</a>
+									<strong><?= htmlspecialchars($priceFmt) ?></strong>
+									<a href="/bread/<?= htmlspecialchars($slug) ?>" class="btn btn-sm btn-outline-primary">Detalhes</a>
 								</div>
 							</div>
 						</div>
 					</div>
-
-					<div class="col-md-4">
-						<div class="card product-card">
-							<img src="https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Bolo de Laranja">
-							<div class="card-body">
-								<h5 class="card-title">Bolo de Laranja</h5>
-								<p class="card-text text-muted">Receita tradicional com laranja fresca.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<strong>R$ 25,00</strong>
-									<a href="/bread/bolo-laranja" class="btn btn-sm btn-outline-primary">Detalhes</a>
-								</div>
-							</div>
-						</div>
+					<?php
+						endforeach;
+					else:
+					?>
+					<div class="col-12">
+						<div class="alert alert-info">Nenhum produto em destaque.</div>
 					</div>
-
-					<div class="col-md-4">
-						<div class="card product-card">
-							<img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Croissant">
-							<div class="card-body">
-								<h5 class="card-title">Croissant</h5>
-								<p class="card-text text-muted">Folhado amanteigado, perfeito no café da manhã.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<strong>R$ 6,00</strong>
-									<a href="/bread/croissant" class="btn btn-sm btn-outline-primary">Detalhes</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					<?php endif; ?>
 				</div>
 			</section>
 

@@ -13,34 +13,25 @@ class BreadController extends Controller
         $breads = new Bread();
         $breads = $breads->all();
 
-        dd($breads);
-        
+        // dd($breads);
+
         $this->view->render('breads', [
             'title' => 'Pães',
-            'description' => 'Veja nossa seleção de pães artesanais.'
+            'description' => 'Veja nossa seleção de pães artesanais.',
+            'breads' => $breads
         ]);
     }
 
     // Mostra detalhes de um pão específico
     public function show(string $slug): void
     {
-        // Exemplo: buscar pão por $id (aqui apenas simulado)
-        $bread = [
-            'id' => $slug,
-            'name' => 'Pão Italiano',
-            'category' => 'grande',
-            'weight' => '800g',
-            'price' => 'R$ 8,50',
-            'description' => 'Crosta crocante, miolo aerado, feito com fermentação natural.'
-        ];
-
         $bread = new Bread();
         $bread = $bread->findBySlug($slug);
 
         $this->view->render('bread', [
             'bread' => $bread,
-            'title' => $bread['name'],
-            'description' => $bread['description']
+            'title' => $bread->name,
+            'description' => $bread->description
         ]);
     }
 

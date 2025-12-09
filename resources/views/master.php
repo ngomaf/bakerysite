@@ -24,9 +24,22 @@
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="paesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pães</a>
 								<ul class="dropdown-menu" aria-labelledby="paesDropdown">
-									<li><a class="dropdown-item" href="/bread/type/big">Pães grande</a></li>
-									<li><a class="dropdown-item" href="/bread/type/middle">Pães médio</a></li>
-									<li><a class="dropdown-item" href="/bread/type/small">Pães pequeno</a></li>
+									<?php
+									if (function_exists('listar_tipos_pao')) {
+										$tipos = listar_tipos_pao();
+										if (!empty($tipos) && is_array($tipos)) {
+											foreach ($tipos as $tipo) {
+												$slug = is_object($tipo) ? ($tipo->slug ?? '') : ($tipo['slug'] ?? '');
+												$nome = is_object($tipo) ? ($tipo->name ?? '') : ($tipo['name'] ?? '');
+												echo '<li><a class="dropdown-item" href="/bread/type/' . htmlspecialchars($slug) . '">' . htmlspecialchars($nome) . '</a></li>';
+											}
+										} else {
+											echo '<li><span class="dropdown-item text-muted">Nenhum tipo cadastrado</span></li>';
+										}
+									} else {
+										echo '<li><span class="dropdown-item text-muted">Tipos não disponíveis</span></li>';
+									}
+									?>
 								</ul>
 							</li>
 							<li class="nav-item"><a class="nav-link" href="/about">Sobre</a></li>

@@ -1,5 +1,6 @@
 /* Estilos mínimos para a view de teste */
-.hero { background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat; height: 420px; }
+.hero { background: url('/assets/images/banner.webp') center/cover no-repeat; height: 420px; }
+/* .hero { background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat; height: 420px; } */
 .hero-overlay { background: rgba(0,0,0,0.35); height: 100%; display:flex; align-items:center; }
 .product-card img { height: 180px; object-fit:cover; }
 
