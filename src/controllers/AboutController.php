@@ -10,7 +10,7 @@ class AboutController extends Controller
     public function index(): void
     {
         $this->view->render('about', [
-            'title' => 'About as',
+            'title' => 'Sobre nós',
             'description' => 'Hi! Well come to our corp.'
         ]);
     }

@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function index():void {
 
         $this->view->render('home', [
-            'title' => 'Home page',
+            'title' => 'Página Inicial',
             'description' => 'This is the home page.'
         ]);
         

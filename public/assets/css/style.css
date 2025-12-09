@@ -1,0 +1,23 @@
+/* Estilos mínimos para a view de teste */
+.hero { background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat; height: 420px; }
+.hero-overlay { background: rgba(0,0,0,0.35); height: 100%; display:flex; align-items:center; }
+.product-card img { height: 180px; object-fit:cover; }
+
+/* about */
+.about-img { max-width: 100%; border-radius: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+
+/* breads */
+.product-card img { height: 200px; object-fit: cover; }
+.category-btn.active { box-shadow: 0 0 0 0.2rem rgba(13,110,253,.25); }
+
+.product-img { max-width: 100%; border-radius: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+
+/* Login */
+.login-card { max-width: 400px; margin: 0 auto; }
+
+
+/* Error page */
+.error-hero { min-height: 280px; display:flex; align-items:center; justify-content:center; background:#f8f9fa; }
+.error-box { max-width:720px; }
