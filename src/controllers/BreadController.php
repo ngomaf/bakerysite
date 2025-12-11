@@ -13,12 +13,17 @@ class BreadController extends Controller
         $breads = new Bread();
         $breads = $breads->all();
 
+        // Buscar categorias dinamicamente
+        $type = new \App\models\Type();
+        $categories = $type->all();
+
         // dd($breads);
 
         $this->view->render('breads', [
             'title' => 'Pães',
             'description' => 'Veja nossa seleção de pães artesanais.',
-            'breads' => $breads
+            'breads' => $breads,
+            'categories' => $categories
         ]);
     }
 

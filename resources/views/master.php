@@ -6,6 +6,7 @@
 		<title><?= $title ?> - Umbala do Pão</title>
 		<meta name="description" content="Padaria Umbala do Pão — pães artesanais, bolos e doces frescos. Conheça nosso cardápio e faça encomendas.">
 		<!-- Bootstrap 5 local -->
+    	<link href="/assets/appmedia/ngomaLogoColorCircleInvert.png" rel="icon" type="image/png" />
 		<link href="/assets/bootstrap5/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.css">
 		<link rel="stylesheet" href="/assets/css/style.css">
@@ -21,9 +22,9 @@
 				<div class="collapse navbar-collapse" id="navMain">
 					<ul class="navbar-nav ms-auto">
 							<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" id="paesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pães</a>
-								<ul class="dropdown-menu" aria-labelledby="paesDropdown">
+							<li class="nav-item dropdown"><a class="nav-link" href="/bread">Pães</a>
+								<!-- <a class="nav-link dropdown-toggle" href="#" id="paesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pães</a> -->
+								<!-- <ul class="dropdown-menu" aria-labelledby="paesDropdown">
 									<?php
 									if (function_exists('listar_tipos_pao')) {
 										$tipos = listar_tipos_pao();
@@ -40,7 +41,7 @@
 										echo '<li><span class="dropdown-item text-muted">Tipos não disponíveis</span></li>';
 									}
 									?>
-								</ul>
+								</ul> -->
 							</li>
 							<li class="nav-item"><a class="nav-link" href="/about">Sobre</a></li>
 							<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>

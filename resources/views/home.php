@@ -21,6 +21,9 @@
 				<div class="row g-4">
 					<?php
 					// Espera-se que $breads seja um array de objetos ou arrays associativos fornecido pelo HomeController
+					
+					$arr_breads = ['/assets/images/bolo-laranja.jpg', '/assets/images/canteiobread.jpg', '/assets/images/cornbread.jpg', '/assets/images/cornbread2.jpg', '/assets/images/croissant.jpg', '/assets/images/croissant2.jpg', '/assets/images/milkbread.jpg', '/assets/images/pao-italiano.jpg'];
+					$arr_size = count($arr_breads)-1;
 					if (!empty($breads) && is_array($breads)):
 						$max = 3; $count = 0;
 						foreach ($breads as $bread):
@@ -29,10 +32,16 @@
 							$slug = is_object($bread) ? ($bread->slug ?? '') : ($bread['slug'] ?? '');
 							$description = is_object($bread) ? ($bread->description ?? '') : ($bread['description'] ?? '');
 							$price = is_object($bread) ? ($bread->price ?? 0) : ($bread['price'] ?? 0);
-							$image = is_object($bread) ? ($bread->image ?? '') : ($bread['image'] ?? '');
+							// $image = is_object($bread) ? ($bread->image ?? '') : ($bread['image'] ?? '');
 							$priceFmt = 'R$ ' . number_format((float)$price, 2, ',', '.');
+							
+							$item_selected = random_int(0, $arr_size);
+							$image = in_array($bread->image, $arr_breads) ? $bread->image : $arr_breads[$item_selected];
+
+							$priceFmt = number_format((float)$price, 2, ',', '.');
+							// fallback para imagem
 							if (empty($image)) {
-								$image = 'https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=600&q=80';
+								$image = '/assets/images/canteiobread.jpg';
 							}
 					?>
 					<div class="col-md-4">

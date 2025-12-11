@@ -5,9 +5,18 @@
         <div>
           <div class="btn-group" role="group" aria-label="Filtrar por categoria">
             <button type="button" class="btn btn-outline-primary category-btn active" data-category="all">Todos</button>
-            <button type="button" class="btn btn-outline-primary category-btn" data-category="grande">Grande</button>
-            <button type="button" class="btn btn-outline-primary category-btn" data-category="medio">Médio</button>
-            <button type="button" class="btn btn-outline-primary category-btn" data-category="pequeno">Pequeno</button>
+            <?php
+              if (!empty($categories) && is_array($categories)):
+                foreach ($categories as $category):
+                  $cat_name = is_object($category) ? ($category->name ?? '') : ($category['name'] ?? '');
+                  $cat_slug = is_object($category) ? ($category->slug ?? '') : ($category['slug'] ?? '');
+                  $cat_display = ucfirst($cat_slug);
+            ?>
+            <button type="button" class="btn btn-outline-primary category-btn" data-category="<?= htmlspecialchars($cat_slug) ?>"><?= htmlspecialchars($cat_display) ?></button>
+            <?php
+                endforeach;
+              endif;
+            ?>
           </div>
         </div>
       </div>
@@ -15,6 +24,9 @@
       <div class="row g-4" id="products">
         <?php
         // Espera-se que $breads seja um array de objetos ou arrays associativos fornecido pelo BreadController
+        $arr_breads = ['/assets/images/bolo-laranja.jpg', '/assets/images/canteiobread.jpg', '/assets/images/cornbread.jpg', '/assets/images/cornbread2.jpg', '/assets/images/croissant.jpg', '/assets/images/croissant2.jpg', '/assets/images/milkbread.jpg', '/assets/images/pao-italiano.jpg'];
+        $arr_size = count($arr_breads)-1;
+        
         if (!empty($breads) && is_array($breads)):
             foreach ($breads as $bread):
                 // suportar objetos (PDO::FETCH_OBJ) ou arrays associativos
@@ -24,11 +36,15 @@
                 $description = is_object($bread) ? ($bread->description ?? '') : ($bread['description'] ?? '');
                 $price = is_object($bread) ? ($bread->price ?? 0) : ($bread['price'] ?? 0);
                 $weight = is_object($bread) ? ($bread->weight ?? '') : ($bread['weight'] ?? '');
-                $image = is_object($bread) ? ($bread->image ?? '') : ($bread['image'] ?? '');
+                // $image = is_object($bread) ? ($bread->image ?? '') : ($bread['image'] ?? '');
+                
+                $item_selected = random_int(0, $arr_size);
+                $image = in_array($bread->image, $arr_breads) ? $bread->image : $arr_breads[$item_selected];
+
                 $priceFmt = number_format((float)$price, 2, ',', '.');
                 // fallback para imagem
                 if (empty($image)) {
-                    $image = 'https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=600&q=80';
+                    $image = '/assets/images/canteiobread.jpg';
                 }
         ?>
 
@@ -77,4 +93,3 @@
         });
       });
     </script>
-
